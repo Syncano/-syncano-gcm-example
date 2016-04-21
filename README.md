@@ -23,7 +23,9 @@ but you don't have to go there. You can manage it there, create new api key etc.
 ------------------------------------
 Send it using simple http request.
 Use your instance name and account key. You can pass your gcm api key as a development key, production key or both, it depends how you want to use them. Set it for both if you're not sure yet.
+```bash
 curl -X "PATCH" "https://api.syncano.io/v1.1/instances/<INSTANCE>/push_notifications/gcm/config/" -H "X-API-KEY: <ACCOUNT_KEY>" -H "Content-Type: application/json" -d '{"production_api_key":"<PRODUCTION_KEY>","development_api_key":"<DEVELOPMENT_KEY>"}'
+```
 
 If using Windows, you can use other tool than curl to make a http request, maybe ["Postman"](https://www.getpostman.com/).
 
@@ -33,7 +35,9 @@ If using Windows, you can use other tool than curl to make a http request, maybe
 - Set your Syncano app api key and instance name in gradle.properties file.
 
 How to create api key for an app?
+```bash
 curl -X "POST" "https://api.syncano.io/v1.1/instances/<INSTANCE>/api_keys/" -H "X-API-KEY: <ACCOUNT_KEY>" -H "Content-type: application/json" -d '{"description": "GCM example app api key", "allow_anonymous_read": false, "allow_user_create": true, "ignore_acl": false}'
+```
 It will be returned in a response.
 
 4. Run your app
@@ -42,9 +46,13 @@ It will be returned in a response.
 - Send GCM messages to chosen registration ids.
 - Check if messages come to your Android notifications bar.
 To send GCM message:
+```bash
 curl -X "POST" "https://api.syncano.io/v1.1/instances/<INSTANCE>/push_notifications/gcm/messages/" -H "X-API-KEY: <ACCOUNT_KEY>" -H "Content-Type: application/json" -d '{ "content": { "environment": "development", "registration_ids":["<REGISTRATION_ID>"], "data": {"message":"sample message"} } }'
+```
 You can also list all registered devices using:
+```bash
 curl -X "GET" "https://api.syncano.io/v1.1/instances/<INSTANCE>/push_notifications/gcm/devices/" -H "X-API-KEY: <ACCOUNT_KEY>"
+```
 
 Api keys used in this example
 -----------------------------
