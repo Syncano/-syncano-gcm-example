@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Syncano GCM</string>
+    <string name="token_success">GCM token is retrieved and sent to Syncano! Your app should be able to receive push messages now.\n\nYour token (registration id) is:\n%s</string>
+    <string name="token_getting">Getting GCM token</string>
+    <string name="token_error">Can\'t get GCM token or send it to Syncano</string>
+    <string name="notification_title">GCM message from Syncano</string>
+</resources>
