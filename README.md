@@ -32,13 +32,7 @@ If using Windows, you can use other tool than curl to make a http request, maybe
 3. Configure your app
 ---------------------
 - Copy your google-services.json to your projects folder. If you used this code, you should override a file in app directoy.
-- Set your Syncano app api key and instance name in `app/gradle.properties` file.
-
-How to create api key for an app?
-```bash
-curl -X "POST" "https://api.syncano.io/v1.1/instances/<INSTANCE>/api_keys/" -H "X-API-KEY: <ACCOUNT_KEY>" -H "Content-type: application/json" -d '{"description": "GCM example app api key", "allow_anonymous_read": false, "allow_user_create": true, "ignore_acl": false}'
-```
-It will be returned in a response.
+- Set your Syncano account key and instance name in `app/gradle.properties` file.
 
 4. Run your app
 ---------------
@@ -57,7 +51,6 @@ curl -X "GET" "https://api.syncano.io/v1.1/instances/<INSTANCE>/push_notificatio
 Api keys used in this example
 -----------------------------
 - Syncano Account API key - It is an administrator key, that can make any changes in his syncano instances.
-- Syncano App API key - It's configured api key, it is hardcoded to the app and allowed to do specific things.
 - GCM Server API key - Key that is necessary to communicate with GCM servers, used by Syncano, not an app.
 - Registration id / token - It's an id given by GCM to specific app on specific device. Using this ids you can send messages to chosen devices.
 
@@ -78,9 +71,9 @@ dependencies {
 
 SampleApplication.java - Initiating Syncano singleton
 ```java
-new SyncanoBuilder().androidContext(getApplicationContext()).apiKey(BuildConfig.API_KEY)
-  .instanceName(BuildConfig.INSTANCE_NAME).setAsGlobalInstance(true).useLoggedUserStorage(true)
-  .build();
+new SyncanoBuilder().androidContext(getApplicationContext()).apiKey(BuildConfig.SYNCANO_API_KEY)
+        .instanceName(BuildConfig.SYNCANO_INSTANCE_NAME).setAsGlobalInstance(true).useLoggedUserStorage(true)
+        .build();
 ```
 
 GetGCMTokenTask.java - Registering device registration id

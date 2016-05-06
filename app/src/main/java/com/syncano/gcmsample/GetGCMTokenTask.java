@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 import com.syncano.library.Syncano;
+import com.syncano.library.api.Response;
 import com.syncano.library.data.PushDevice;
 
 import java.io.IOException;
@@ -25,13 +26,15 @@ public class GetGCMTokenTask extends AsyncTask<Void, Void, String> {
         // get gcm token from Google
         String token = getGCMTokenFromGoogle();
         if (token == null || token.isEmpty()) {
-            Log.w(TAG, "Error getting GCM token");
+            Log.w(TAG, "Error getting GCM token from Google");
             return "";
         }
         Log.i(TAG, "GCM Registration Token: " + token);
 
         // send gcm token to Syncano
-        if (!Syncano.getInstance().registerPushDevice(new PushDevice(token)).send().isSuccess()) {
+        Response syncanoResponse = Syncano.getInstance().registerPushDevice(new PushDevice(token)).send();
+        if (!syncanoResponse.isSuccess()) {
+            Log.e(TAG, "Error sending GCM token to Syncano: " + syncanoResponse.getHttpResultCode() + " " + syncanoResponse.getError());
             return "";
         }
 
