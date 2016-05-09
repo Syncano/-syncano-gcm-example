@@ -31,7 +31,7 @@ If using Windows, you can use other tool than curl to make a http request, maybe
 
 3. Configure your app
 ---------------------
-- Copy your google-services.json to your projects folder. If you used this code, you should override a file in app directoy.
+- Copy your google-services.json to your projects folder. If you used this code, you should override a file in app directory.
 - Set your Syncano account key and instance name in `app/gradle.properties` file.
 
 4. Run your app
